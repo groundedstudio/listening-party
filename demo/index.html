@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Listening Party Demo</title>
+    </head>
+    <body>
+        <div class="headerBar" id="listeningParty">
+            <div class="headerBarText">
+                Listening Party
+            </div>
+        </div>
+        <div class="headerBar" id="partyTitle">
+            <div class="headerBarText" id="partyTitleText">
+                Demo Album by Demo Artist
+                <div id="countdown"></div>
+            </div>
+        </div>
+        <div id="momentContainer">
+            <div id="momentContainerInner">
+                <a class="twitter-moment" href="https://twitter.com/i/moments/625792726546558977?ref_src=twsrc%5Etfw"></a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+        <div class="mediaFooter">
+            <div id="connectWithSpotify">
+                <a href="https://accounts.spotify.com/authorize?response_type=code&client_id=fbde79bb6dc34603aa564d911beb6898&scope=streaming&redirect_uri=https%3A%2F%2Flistening-party.com/demo">
+                    <img id="connectWithSpotifyImg" src="../assets/CONNECT.png" alt="Connect with Spotify">
+                </a>
+            </div>
+            <div id="playAt">
+                <span class="material-icons" id="playAtArrow">play_arrow</span>@<span id="playAtTime"></span>
+            </div>
+        </div>
+        
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        <script src="./listeningPartyDemo.js" charset="utf-8"></script>
+    </body>
+</html>
