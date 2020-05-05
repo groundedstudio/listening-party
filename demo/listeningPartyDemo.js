@@ -101,11 +101,9 @@ if (urlParams.get('code') != null) {
                 document.getElementById('spotifyWillPlayIn').innerHTML = "The party has ended!";
             // If the count down has finished and the user has joined during the
             // party session, seek/skip them to the right place.
-            } else if () {
+            } else if ((distance < 0)(distance > (Object.keys(tracklist)[Object.keys(tracklist).length - 1]))) {
                 console.log("Skip to correct position");
             };
-
-
         }, 1000);
     };
 };
