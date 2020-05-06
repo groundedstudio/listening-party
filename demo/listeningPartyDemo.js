@@ -1,7 +1,7 @@
 // listeningPartyDemo.js
 
 // Set the date we're counting down to
-var countDownDate = new Date("May 6, 2020 15:00:00");
+var countDownDate = new Date("May 6, 2020 16:00:00");
 
 // Set the tracklist/timings.
 const tracklist = [{0: "Intro"}, {663: "Track 2"}, {723: "End"}];
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     spotWillPlayIn.style.padding = "0px 0px 0px 17.5px";
                 // If the count down has finished and the user has joined during the
                 // party session, seek/skip them to the right place.
-                } else if ((distance < 0)(distance > (Object.keys(tracklist)[Object.keys(tracklist).length - 1]))) {
+                } else if ((distance < 0) && (distance > (Object.keys(tracklist)[Object.keys(tracklist).length - 1]))) {
                     console.log("Skip to correct position");
                 };
             }, 1000);
