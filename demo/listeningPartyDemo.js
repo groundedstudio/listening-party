@@ -1,10 +1,20 @@
 // listeningPartyDemo.js
 
 // Set the date we're counting down to
-var countDownDate = new Date("May 6, 2020 16:00:00");
+var countDownDate = new Date("May 6, 2020 17:00:00");
 
 // Set the tracklist/timings.
-const tracklist = [{0: "Intro"}, {663: "Track 2"}, {723: "End"}];
+const tracklist = [
+    {0: "Headache"},
+    {183: "Pull Up (feat. Bowzer Boss)"},
+    {366: "Knock Door Run"},
+    {544: "Moscow (feat. Bowzer Boss)"},
+    {743: "Every Country (feat. Murkage Dave)"},
+    {1021: "Let Me Go (feat. TiGA & YASeeN RosaY)"},
+    {1259: "Anymore (feat. S-X)"},
+    {1455: "Toothache"},
+    {1620: "END"}
+];
 
 // Countdown text stuff.
 function formatHoursOrMins (num) {
@@ -41,7 +51,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (distance < 0) {
             clearInterval(x);
             document.querySelector("#countdown").innerHTML = "The listening party has started!";
-        } else if (distance < (Object.keys(tracklist)[Object.keys(tracklist).length - 1])) {
+        } else if (distance < -(Object.keys(tracklist[(tracklist.length - 1)])[0])) {
             clearInterval(x);
             document.querySelector("#countdown").innerHTML = "The listening party has ended!";
         };
@@ -134,14 +144,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
                     });
                 // If the count down has finished and the user is after the time that
-                // the part is due to finish, tell them.
-                } else if (distance < (Object.keys(tracklist)[Object.keys(tracklist).length - 1])) {
+                // the party is due to finish, tell them.
+                } else if (distance < -(Object.keys(tracklist[(tracklist.length - 1)])[0])) {
                     clearInterval(y);
                     var spotWillPlayIn = document.getElementById('spotifyWillPlayIn')
                     spotWillPlayIn.innerHTML = "The party has ended!";
                 // If the count down has finished and the user has joined during the
                 // party session, seek/skip them to the right place.
-                } else if ((distance < 0) && (distance > (Object.keys(tracklist)[Object.keys(tracklist).length - 1]))) {
+                } else if ((distance < 0) && (distance > -(Object.keys(tracklist[(tracklist.length - 1)])[0]))) {
+                    clearInterval(y);
+                    play({
+                        playerInstance: player,
+                        spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
+                    });
                     console.log("Skip to correct position");
                 };
             }, 1000);
