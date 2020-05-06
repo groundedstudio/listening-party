@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // 'spotify will play in...' text.
         document.getElementById('playAt').style.display = "none";
         document.getElementById('connectWithSpotify').style.display = "none";
-        document.getElementById('spotifyWillPlayIn').style.display = "inline";
 
         // When playback SDK is ready, generate player with user's access_token.
         window.onSpotifyWebPlaybackSDKReady = () => {
@@ -83,6 +82,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // Ready
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
+                // Let the user know that spotify will play when the party starts.
+                document.getElementById('spotifyWillPlayIn').style.display = "inline";
             });
 
             // Not Ready
@@ -138,7 +139,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     clearInterval(y);
                     var spotWillPlayIn = document.getElementById('spotifyWillPlayIn')
                     spotWillPlayIn.innerHTML = "The party has ended!";
-                    spotWillPlayIn.style.padding = "0px 0px 0px 17.5px";
                 // If the count down has finished and the user has joined during the
                 // party session, seek/skip them to the right place.
                 } else if ((distance < 0) && (distance > (Object.keys(tracklist)[Object.keys(tracklist).length - 1]))) {

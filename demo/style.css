@@ -102,3 +102,9 @@ body {
     border-radius: 19.5px;
     padding: 0 17.5px 0 9px;
 }
+
+#spotifyWillPlayIn {
+    margin: auto;
+    padding-left: 17.5px;
+    padding-right: 17.5px;
+}
