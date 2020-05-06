@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else if (distance < (Object.keys(tracklist)[Object.keys(tracklist).length - 1])) {
             clearInterval(x);
             document.querySelector("#countdown").innerHTML = "The listening party has ended!";
+        };
     }, 1000);
 
     // Determine if the Spotify Web SDK should be loaded.
