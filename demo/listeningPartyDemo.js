@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }, 1000);
 
     // Determine if the Spotify Web SDK should be loaded.
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    const queryString = window.location.hash;
+    const urlParams = new URLSearchParams(('?' + queryString.substring(1)));
     // Check that there is an access token provided.
     if (urlParams.get('access_token') != null) {
         // Add the Spotify SDK script tag to the DOM.

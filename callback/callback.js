@@ -1,7 +1,7 @@
 // callback.js
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+const queryString = window.location.hash;
+const urlParams = new URLSearchParams(('?' + queryString.substring(1)));
 const session = urlParams.get('state');
 
 if (session != null) {
