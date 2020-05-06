@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // Find the distance between now and the count down date
         var distance = countDownDate.getTime() - now;
-
+        console.log(distance);
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // If the count down is finished, and the user is within 2 seconds
                 // of the party start time, and the resource has not started
                 // playing yet, clear the countdown and play the resource.
-                if ((distance < 0) && (distance > -2) && !playing) {
+                if ((distance < 0) && ((distance/1000) > -2) && !playing) {
                     playing = true;
                     play({
                         playerInstance: player,
@@ -146,21 +146,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     });
                 // If the count down has finished and the user is after the time that
                 // the party is due to finish, tell them.
-                } else if (distance < -(tracklist[(tracklist.length - 1)][0])) {
+                } else if ((distance/1000) < -(tracklist[(tracklist.length - 1)][0])) {
                     clearInterval(y);
                     var spotWillPlayIn = document.getElementById('spotifyWillPlayIn')
                     spotWillPlayIn.innerHTML = "The party has ended!";
                 // If the count down has finished and the user has joined during the
                 // party session, and the resouce has not started playing yet,
                 // seek/skip them to the right place.
-                } else if ((distance < 0) && (distance > -(tracklist[(tracklist.length - 1)][0])) && !playing) {
+                } else if ((distance < 0) && ((distance/1000) > -(tracklist[(tracklist.length - 1)][0])) && !playing) {
                     playing = true;
                     play({
                         playerInstance: player,
                         spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
                     });
                     console.log("Skip to correct position");
-                    console.log(howFarThroughTracklist(tracklist, Math.abs(distance)))
+                    console.log(howFarThroughTracklist(tracklist, Math.abs((distance/1000))));
                 };
             }, 1000);
         };
