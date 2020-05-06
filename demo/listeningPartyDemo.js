@@ -1,7 +1,7 @@
 // listeningPartyDemo.js
 
 // Set the date we're counting down to
-var countDownDate = new Date("May 5, 2020 19:00:00");
+var countDownDate = new Date("May 6, 2020 15:00:00");
 
 // Set the tracklist/timings.
 const tracklist = [{0: "Intro"}, {663: "Track 2"}, {723: "End"}];
@@ -18,6 +18,7 @@ function formatHoursOrMins (num) {
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('#playAtTime').innerHTML = formatHoursOrMins(countDownDate.getHours()) + ":" + formatHoursOrMins(countDownDate.getMinutes());
 
+    // Countdown in header bar.
     // Update the count down every 1 second
     var x = setInterval(function() {
 
@@ -40,7 +41,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (distance < 0) {
             clearInterval(x);
             document.querySelector("#countdown").innerHTML = "The listening party has started!";
-        }
+        } else if (distance < (Object.keys(tracklist)[Object.keys(tracklist).length - 1])) {
+            clearInterval(x);
+            document.querySelector("#countdown").innerHTML = "The listening party has ended!";
     }, 1000);
 
     // Determine if the Spotify Web SDK should be loaded.
@@ -110,6 +113,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 });
             };
 
+            // Countdown to Spotify Play.
             // Update the count down every 1 second
             var y = setInterval(function() {
 
@@ -125,7 +129,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     clearInterval(y);
                     play({
                         playerInstance: player,
-                        spotify_uri: 'spotify:album:7dK54iZuOxXFarGhXwEXfF',
+                        spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
                     });
                 // If the count down has finished and the user is after the time that
                 // the part is due to finish, tell them.
@@ -134,7 +138,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     var spotWillPlayIn = document.getElementById('spotifyWillPlayIn')
                     spotWillPlayIn.innerHTML = "The party has ended!";
                     spotWillPlayIn.style.padding = "0px 0px 0px 17.5px";
-                    document.querySelector("#countdown").innerHTML = "The listening party has ended!";
                 // If the count down has finished and the user has joined during the
                 // party session, seek/skip them to the right place.
                 } else if ((distance < 0)(distance > (Object.keys(tracklist)[Object.keys(tracklist).length - 1]))) {
