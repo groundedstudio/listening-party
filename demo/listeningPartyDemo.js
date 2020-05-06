@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     // Check that there is an access token provided.
-    if (urlParams.get('code') != null) {
+    if (urlParams.get('access_token') != null) {
         // Add the Spotify SDK script tag to the DOM.
         var spotifySDK = document.createElement('script');
         spotifySDK.setAttribute('src','https://sdk.scdn.co/spotify-player.js');
@@ -63,9 +63,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('connectWithSpotify').style.display = "none";
         document.getElementById('spotifyWillPlayIn').style.display = "inline";
 
-        // When playback SDK is ready, generate player with user's code.
+        // When playback SDK is ready, generate player with user's access_token.
         window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = urlParams.get('code');
+            const token = urlParams.get('access_token');
             const player = new Spotify.Player({
                 name: 'Listening Party',
                 getOAuthToken: cb => { cb(token); }
