@@ -1,19 +1,19 @@
 // listeningPartyDemo.js
 
 // Set the date we're counting down to
-var countDownDate = new Date("May 6, 2020 17:00:00");
+var countDownDate = new Date("May 6, 2020 17:30:00");
 
 // Set the tracklist/timings.
 const tracklist = [
-    [0: "Headache"],
-    [183: "Pull Up (feat. Bowzer Boss)"],
-    [366: "Knock Door Run"],
-    [544: "Moscow (feat. Bowzer Boss)"],
-    [743: "Every Country (feat. Murkage Dave)"],
-    [1021: "Let Me Go (feat. TiGA & YASeeN RosaY)"],
-    [1259: "Anymore (feat. S-X)"],
-    [1455: "Toothache"],
-    [1620: "END"]
+    [0, "Headache"],
+    [183, "Pull Up (feat. Bowzer Boss)"],
+    [366, "Knock Door Run"],
+    [544, "Moscow (feat. Bowzer Boss)"],
+    [743, "Every Country (feat. Murkage Dave)"],
+    [1021, "Let Me Go (feat. TiGA & YASeeN RosaY)"],
+    [1259, "Anymore (feat. S-X)"],
+    [1455, "Toothache"],
+    [1620, "END"]
 ];
 
 // Countdown text stuff.
