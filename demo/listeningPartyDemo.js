@@ -5,15 +5,15 @@ var countDownDate = new Date("May 6, 2020 17:00:00");
 
 // Set the tracklist/timings.
 const tracklist = [
-    {0: "Headache"},
-    {183: "Pull Up (feat. Bowzer Boss)"},
-    {366: "Knock Door Run"},
-    {544: "Moscow (feat. Bowzer Boss)"},
-    {743: "Every Country (feat. Murkage Dave)"},
-    {1021: "Let Me Go (feat. TiGA & YASeeN RosaY)"},
-    {1259: "Anymore (feat. S-X)"},
-    {1455: "Toothache"},
-    {1620: "END"}
+    [0: "Headache"],
+    [183: "Pull Up (feat. Bowzer Boss)"],
+    [366: "Knock Door Run"],
+    [544: "Moscow (feat. Bowzer Boss)"],
+    [743: "Every Country (feat. Murkage Dave)"],
+    [1021: "Let Me Go (feat. TiGA & YASeeN RosaY)"],
+    [1259: "Anymore (feat. S-X)"],
+    [1455: "Toothache"],
+    [1620: "END"]
 ];
 
 // Countdown text stuff.
@@ -49,9 +49,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // If the count down is finished, write some text
         if (distance < 0) {
-            clearInterval(x);
             document.querySelector("#countdown").innerHTML = "The listening party has started!";
-        } else if (distance < -(Object.keys(tracklist[(tracklist.length - 1)])[0])) {
+        } else if (distance < -(tracklist[(tracklist.length - 1)][0])) {
             clearInterval(x);
             document.querySelector("#countdown").innerHTML = "The listening party has ended!";
         };
@@ -127,6 +126,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             // Countdown to Spotify Play.
             // Update the count down every 1 second
+            var playing = false;
             var y = setInterval(function() {
 
                 // Get today's date and time
@@ -136,30 +136,56 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 var distance = countDownDate.getTime() - now;
 
                 // If the count down is finished, and the user is within 2 seconds
-                // of the party start time, clear the countdown and play the resource.
-                if ((distance < 0) && (distance > -2)) {
-                    clearInterval(y);
+                // of the party start time, and the resource has not started
+                // playing yet, clear the countdown and play the resource.
+                if ((distance < 0) && (distance > -2) && !playing) {
+                    playing = true;
                     play({
                         playerInstance: player,
                         spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
                     });
                 // If the count down has finished and the user is after the time that
                 // the party is due to finish, tell them.
-                } else if (distance < -(Object.keys(tracklist[(tracklist.length - 1)])[0])) {
+                } else if (distance < -(tracklist[(tracklist.length - 1)][0])) {
                     clearInterval(y);
                     var spotWillPlayIn = document.getElementById('spotifyWillPlayIn')
                     spotWillPlayIn.innerHTML = "The party has ended!";
                 // If the count down has finished and the user has joined during the
-                // party session, seek/skip them to the right place.
-                } else if ((distance < 0) && (distance > -(Object.keys(tracklist[(tracklist.length - 1)])[0]))) {
-                    clearInterval(y);
+                // party session, and the resouce has not started playing yet,
+                // seek/skip them to the right place.
+                } else if ((distance < 0) && (distance > -(tracklist[(tracklist.length - 1)][0])) && !playing) {
+                    playing = true;
                     play({
                         playerInstance: player,
                         spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
                     });
                     console.log("Skip to correct position");
+                    console.log(howFarThroughTracklist(tracklist, Math.abs(distance)))
                 };
             }, 1000);
         };
     };
 })
+
+// function to find how far through which song in a tracklist a given number
+// of seconds is.
+// returns an array of [tracklist_index, seconds_through_song], or null if
+// resource has finished.
+function howFarThroughTracklist(tracklist, noOfSeconds) {
+    var index;
+    var seekSecs;
+    // If resource has finished.
+    if (noOfSeconds >= (tracklist[tracklist.length - 1][0])) {
+        return(null);
+    };
+
+    tracklist.forEach((track, i) => {
+        // If playing track is current track value.
+        if (noOfSeconds < (tracklist[i+1][0])) {
+            index = i;
+            seekSecs = (noOfSeconds - track[0]);
+            return([index, seekSecs]);
+        }
+    });
+
+};
