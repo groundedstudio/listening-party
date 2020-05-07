@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="./style.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="icon" type="image/gif" href="../assets/favicon.gif">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
         <script src="./listeningPartyDemo.js" charset="utf-8"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165844331-1"></script>
@@ -50,5 +51,26 @@
                 Keep this page open; Spotify will play when the party starts!
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+        <script>
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#000000",
+                        "text": "#ffffff"
+                    },
+                    "button": {
+                        "background": "#ffffff",
+                        "text": "#000000"
+                    }
+                },
+                "theme": "edgeless",
+                "position": "bottom-right",
+                "content": {
+                    "message": "This website uses cookies to ensure that you get the best experience.",
+                    "href": "https://listening-party.com/privacy"
+                }
+            });
+        </script>
     </body>
 </html>
