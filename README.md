@@ -28,3 +28,5 @@ Check out the [rolling demo](demo) - the party starts on the hour, every hour.
 Price: £0.00
 
 If you want number of participant data etc. that's also possible, make sure to mention it in your email.
+
+[Privacy Policy](https://listening-party.com/privacy)
