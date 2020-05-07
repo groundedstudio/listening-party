@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="icon" type="image/gif" href="../assets/favicon.gif">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+        <script src="./listeningParty.js" charset="utf-8"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165844331-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-165844331-1');
+        </script>
+        <title>Listening Party | ILIWYSFYASBYSUOI - The 1975</title>
+    </head>
+    <body>
+        <div class="headerBar" id="listeningParty">
+            <div class="headerBarText">
+                Listening Party
+                <a href=".." id="about">About</a>
+            </div>
+        </div>
+        <div class="headerBar" id="partyTitle">
+            <div class="headerBarText" id="partyTitleText">
+                ILIWYSFYASBYSUOI by The 1975
+                <div id="countdown"></div>
+            </div>
+        </div>
+        <div id="momentContainer">
+            <div id="momentContainerInner">
+                <a class="twitter-timeline" href="https://twitter.com/StudioGrounded/lists/an-experience?ref_src=twsrc%5Etfw">A Twitter List by StudioGrounded</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+        <div class="mediaFooter">
+            <div id="connectWithSpotify">
+                <a href="https://accounts.spotify.com/authorize?response_type=token&client_id=fbde79bb6dc34603aa564d911beb6898&scope=streaming%20user-read-private%20user-read-email&state=iliwys&redirect_uri=https%3A%2F%2Flistening-party.com/callback">
+                    <img id="connectWithSpotifyImg" src="../assets/CONNECT.png" alt="Connect with Spotify">
+                    <img id="spotifyIconImg" src="../assets/SPOTIFY_ICON.png" alt="Connect with Spotify">
+                </a>
+            </div>
+            <div id="playAt">
+                <span class="material-icons" id="playAtArrow">play_arrow</span>@<span id="playAtTime"></span>
+            </div>
+            <div id="spotifyWillPlayIn">
+                Keep this page open; Spotify will play when the party starts!
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+        <script>
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#000000",
+                        "text": "#ffffff"
+                    },
+                    "button": {
+                        "background": "#ffffff",
+                        "text": "#000000"
+                    }
+                },
+                "theme": "edgeless",
+                "position": "bottom-right",
+                "content": {
+                    "message": "This website uses cookies to ensure that you get the best experience.",
+                    "href": "https://listening-party.com/privacy"
+                }
+            });
+        </script>
+    </body>
+</html>

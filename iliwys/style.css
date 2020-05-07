@@ -1,0 +1,129 @@
+html {
+    font-family: monospace;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.headerBar {
+    margin: 0 auto;
+    width: 100%;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+}
+
+.headerBarText {
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#listeningParty {
+    min-height: 25px;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+
+#partyTitle {
+    display: flex;
+    left: 0;
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+#countdown {
+    float: right;
+}
+
+#momentContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#momentContainerInner {
+    width: 100%;
+}
+
+.mediaFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 70px;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+#connectWithSpotify {
+    margin-left: 17.5px;
+    height: 35px;
+}
+
+#connectWithSpotifyImg {
+    max-height: 35px;
+    display: none;
+}
+
+#playAt {
+    margin-left: auto;
+    margin-right: 17.5px;
+    background-color: black;
+    height: 31px;
+    border: solid;
+    border-width: 2px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 19.5px;
+    padding: 0 17.5px 0 9px;
+}
+
+#spotifyWillPlayIn {
+    text-align: center;
+    display: none;
+    margin: auto;
+    padding-left: 17.5px;
+    padding-right: 17.5px;
+}
+
+a#about {
+    float: right;
+}
+
+#spotifyIconImg {
+    max-height: 35px;
+}
+
+@media screen and (min-width: 800px) {
+    .headerBar {
+        width: 800px;
+    }
+
+    #momentContainer {
+        width: 800px;
+        margin: 0 auto;
+    }
+
+    #connectWithSpotifyImg {
+        display: inline;
+    }
+
+    #spotifyIconImg {
+        display: none;
+    }
+}
