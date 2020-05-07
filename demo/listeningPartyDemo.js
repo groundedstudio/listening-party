@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // Set 'playAt' in media bar to show how far throught the party is.
             var seekTo = howFarThroughTracklist(tracklist, Math.abs((distance/1000)));
             var playAt = document.querySelector("#playAt");
-            playAt.innerHTML = `${tracklist[seekTo[0]][1]} - ${Math.floor(((seekTo[1] * 1000) % (1000 * 60 * 60)) / (1000 * 60))}:${Math.floor(((seekTo[1] * 1000) % (1000 * 60)) / 1000)}`;
+            playAt.innerHTML = `${tracklist[seekTo[0]][1]} - ${formatHoursOrMins(Math.floor(((seekTo[1] * 1000) % (1000 * 60 * 60)) / (1000 * 60)))}:${formatHoursOrMins(Math.floor(((seekTo[1] * 1000) % (1000 * 60)) / 1000))}`;
             playAt.style.padding = "0 17.5px 0 17.5px";
         };
     }, 1000);
