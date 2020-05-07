@@ -5,7 +5,7 @@ Use Twitter and (optionally, if using a desktop browser) Spotify to create easy 
 
 The listening party page will contain a Twitter Timeline automatically updating with tweets relevant to the party. If you open the page before the party start time, there's a countdown to the start time.
 
-If you've connected with Spotify (Desktop Only atm sorry):
+If you've connected with Spotify (Desktop only atm sorry):
 - Music will begin playing in the browser at the party start time.
 - If you join after the start time, you'll automatically skip to the same point in the music as everyone else.
 - After playing, you can swap playback to any other Spotify Connect'd device.
