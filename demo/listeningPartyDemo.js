@@ -1,7 +1,18 @@
 // listeningPartyDemo.js
 
+// If the current time is before half past the hour, the start time is the hour
+// just passed. If the current time is after half past the hour, the start time
+// is on the coming hour.
 // Set the date we're counting down to
-var countDownDate = new Date("May 6, 2020 17:30:00");
+var countDownDate = new Date();
+if (countDownDate.getMinutes() < 30) {
+    countDownDate.setSeconds(0);
+    countDownDate.setMinutes(0);
+} else {
+    countDownDate.setSeconds(0);
+    countDownDate.setMinutes(0);
+    countDownDate.setHours((countDownDate.getHours() + 1));
+};
 
 // Set the tracklist/timings.
 const tracklist = [
@@ -15,6 +26,7 @@ const tracklist = [
     [1455, "Toothache"],
     [1620, "END"]
 ];
+const tracklistURIs = ['spotify:track:2hLuNmDwpl04WVyFXhQePA', 'spotify:track:1yPujwhLo1TmyRGh5BVivY', 'spotify:track:7GtbccqbIm5w3hIlgPafxr', 'spotify:track:1sdYeOmSJymoav7ZQ7cXZO', 'spotify:track:3UrExtBIW2ZXNUIzmlCuvz', 'spotify:track:5HFPM9uTdfoEnvygUmZiU1', 'spotify:track:1yGnoWeatZTiCuS4xbiGy5', 'spotify:track:2ljuwHtdINTHKX4Mz5ujzw'];
 
 // Countdown text stuff.
 function formatHoursOrMins (num) {
@@ -37,22 +49,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // Find the distance between now and the count down date
         var distance = countDownDate.getTime() - now;
-        console.log(distance);
+
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.querySelector("#countdown").innerHTML = days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
+        if (distance > 0) {
+            document.querySelector("#countdown").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+        }
 
         // If the count down is finished, write some text
-        if (distance < 0) {
-            document.querySelector("#countdown").innerHTML = "The listening party has started!";
-        } else if (distance < -(tracklist[(tracklist.length - 1)][0])) {
+        if ((distance/1000) < -(tracklist[(tracklist.length - 1)][0])) {
             clearInterval(x);
             document.querySelector("#countdown").innerHTML = "The listening party has ended!";
+        } else if (distance < 0) {
+            document.querySelector("#countdown").innerHTML = "The listening party has started!";
+            // Set 'playAt' in media bar to show how far throught the party is.
+            var seekTo = howFarThroughTracklist(tracklist, Math.abs((distance/1000)));
+            var playAt = document.querySelector("#playAt");
+            playAt.innerHTML = `${tracklist[seekTo[0]][1]} - ${Math.floor(((seekTo[1] * 1000) % (1000 * 60 * 60)) / (1000 * 60))}:${Math.floor(((seekTo[1] * 1000) % (1000 * 60)) / 1000)}`;
+            playAt.style.padding = "0 17.5px 0 17.5px";
         };
     }, 1000);
 
@@ -115,7 +133,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 getOAuthToken(access_token => {
                     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
                         method: 'PUT',
-                        body: JSON.stringify({ context_uri: spotify_uri }),
+                        body: JSON.stringify({ uris: spotify_uri }),
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${access_token}`
@@ -142,7 +160,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     playing = true;
                     play({
                         playerInstance: player,
-                        spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
+                        spotify_uri: tracklistURIs,
                     });
                 // If the count down has finished and the user is after the time that
                 // the party is due to finish, tell them.
@@ -154,13 +172,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // party session, and the resouce has not started playing yet,
                 // seek/skip them to the right place.
                 } else if ((distance < 0) && ((distance/1000) > -(tracklist[(tracklist.length - 1)][0])) && !playing) {
+                    console.log("Skip/Seeking to correct position.");
+                    // Generate a the list of remaining songs.
+                    var seekTo = howFarThroughTracklist(tracklist, Math.abs((distance/1000)));
+                    var uri_array = tracklistURIs.splice(seekTo[0]);
                     playing = true;
                     play({
                         playerInstance: player,
-                        spotify_uri: 'spotify:album:1fsaYVjt3lRC0jIL9YuEne',
+                        spotify_uri: uri_array,
                     });
-                    console.log("Skip to correct position");
-                    console.log(howFarThroughTracklist(tracklist, Math.abs((distance/1000))));
+                    setTimeout(() => { player.seek(((seekTo[1] * 1000) -1000)); }, 1000);
                 };
             }, 1000);
         };
@@ -179,13 +200,12 @@ function howFarThroughTracklist(tracklist, noOfSeconds) {
         return(null);
     };
 
-    tracklist.forEach((track, i) => {
+    for (var i=0; i<tracklist.length; i++) {
         // If playing track is current track value.
         if (noOfSeconds < (tracklist[i+1][0])) {
             index = i;
-            seekSecs = (noOfSeconds - track[0]);
+            seekSecs = (noOfSeconds - tracklist[i][0]);
             return([index, seekSecs]);
         }
-    });
-
+    }
 };
