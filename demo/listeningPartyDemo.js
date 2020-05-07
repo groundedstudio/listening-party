@@ -37,6 +37,18 @@ function formatHoursOrMins (num) {
     }
 }
 
+// Shorten a text string if it's longed than a given amount of characters.
+function shortenString(string, length) {
+    // Take the absolute of the value.
+    const absLen = Math.abs(length);
+
+    if (string.length > absLen) {
+        return(`${string.slice(0, (length-3))}...`)
+    } else {
+        return(string);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('#playAtTime').innerHTML = formatHoursOrMins(countDownDate.getHours()) + ":" + formatHoursOrMins(countDownDate.getMinutes());
 

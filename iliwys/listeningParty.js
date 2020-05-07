@@ -1,7 +1,7 @@
 // listeningParty.js
 
 // Set the date we're counting down to
-var countDownDate = new Date('07 May 2020 13:00:00 UTC');
+var countDownDate = new Date('08 May 2020 18:00:00 UTC');
 
 // Set the tracklist/timings.
 const tracklist = [
